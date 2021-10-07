@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        FUT Enhancer
-// @version     4.0.1
+// @version     4.0.2
 // @description Enhances the FIFA Ultimate Team 22 Web app. Includes Futbin integration and other useful tools
 // @license     MIT
 // @author      djizus - Tim Klingeleers
@@ -17,8 +17,8 @@
 // @connect     ea.com
 // @connect     futbin.com
 // @connect     google-analytics.com
-// @updateURL   https://github.com/djizus/futwebapp-tampermonkey-web/raw/master/downloads/FUT_Enhancer.meta.js
-// @downloadURL https://github.com/djizus/futwebapp-tampermonkey-web/raw/master/downloads/FUT_Enhancer.user.js
+// @updateURL   https://github.com/djizus/futwebapp-tampermonkey/releases/latest/download/fut-enhancer.user.js
+// @downloadURL https://github.com/djizus/futwebapp-tampermonkey/releases/latest/download/fut-enhancer.user.js
 // ==/UserScript==
 
 /******/ (function(modules) { // webpackBootstrap
@@ -3377,7 +3377,9 @@ var FutbinSettings = exports.FutbinSettings = function (_SettingsEntry) {
 
     _this.addSetting('Show link to player page', 'show-link-to-player', false, 'checkbox');
     _this.addSetting('Show prices on SBC and Squad', 'show-sbc-squad', false, 'checkbox');
-    _this.addSetting('Mark bargains', 'show-bargains', false, 'checkbox');
+    _this.addSetting('Mark buy now bargains (green)', 'show-bargains', false, 'checkbox');
+    _this.addSettingUnder('show-bargains', 'Highlight bargains at following percentage', 'show-bargains-percentage', 10, 'number');
+    _this.addSettingUnder('show-bargains', 'Also mark current bids bargains (blue)', 'show-bargains-bid', false, 'checkbox');
     return _this;
   }
 
@@ -12447,6 +12449,7 @@ var TransferMarket = exports.TransferMarket = function () {
             switch (_context7.prev = _context7.next) {
               case 0:
                 minBuy = 99999999;
+				console.log("on arrive à _defineSearchCriteria")
                 searchCriteria = this._defineSearchCriteria(item);
                 valuesFound = [];
                 minBuyFound = false;
@@ -12589,26 +12592,25 @@ var TransferMarket = exports.TransferMarket = function () {
 
       searchCriteria.count = 30;
 
-	  //this._logger.log('Log test ' + JSON.stringify(item, getCircularReplacer()), 'Core - Transfermarket');
 	  searchCriteria.maskedDefId = item.definitionId;
       searchCriteria.type = item.type;
-
+	  console.log('Log test rareflag');
+	  console.log(item.rareflag);
       if (item.rareflag === 47) {
         // 47 = Champions
         // if it is a Champions card, this is seen as a gold card
         // Can only search for "Gold" in this case
-        searchCriteria.level = UTDataProviderFactory.prototype.getItemLevelDP(true).filter(function (d) {
-          return d.id === 2;
-        })[0].value;
+        console.log('Log test rareflag 47');
+        searchCriteria.level = enums.SearchLevel.GOLD;
       } else if (item.rareflag >= 3) {
         // 3 = TOTW
         // if it is TOTW or other special, set it to TOTW. See enums.ItemRareType.
         // Can only search for "Specials", not more specific on Rare Type
-        searchCriteria.level = UTDataProviderFactory.prototype.getItemLevelDP(true).filter(function (d) {
-          return d.id === 3;
-        })[0].value;
+        console.log('Log test rareflag 3');
+        searchCriteria.level = enums.SearchLevel.GOLD;
       }
 
+	  console.log('Log test category & position');
       searchCriteria.category = SearchCategory.ANY;
       searchCriteria.position = SearchType.ANY;
       if (maxBuy !== -1) {
@@ -14014,7 +14016,9 @@ var FutbinPrices = exports.FutbinPrices = function (_BaseScript) {
       }
 
       var showBargains = this.getSettings()['show-bargains'].toString() === 'true';
-
+      var showBargainsBid = this.getSettings()['show-bargains-bid'].toString() === 'true';
+      var showBargainsPercentage = this.getSettings()['show-bargains-percentage'];
+	  
       var definitionIdMapping = [];
 
       listrows.filter(function (row) {
@@ -14051,7 +14055,7 @@ var FutbinPrices = exports.FutbinPrices = function (_BaseScript) {
 
             var futbinData = JSON.parse(res.response);
             definitionIdMapping.forEach(function (item) {
-              FutbinPrices._showFutbinPrice(screen, item, futbinData, showBargains);
+              FutbinPrices._showFutbinPrice(screen, item, futbinData, showBargains, showBargainsBid, showBargainsPercentage);
               futbinlist.push(futbinData[item.playerId]);
             });
             var platform = _fut.utils.getPlatform();
@@ -14068,7 +14072,7 @@ var FutbinPrices = exports.FutbinPrices = function (_BaseScript) {
   }], [{
     key: '_showFutbinPrice',
     value: function () {
-      var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(screen, item, futbinData, showBargain) {
+      var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(screen, item, futbinData, showBargain, showBargainBid, showBargainPercentage) {
         var target, playerId, platform, targetForButton, futbinText;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
@@ -14137,17 +14141,19 @@ var FutbinPrices = exports.FutbinPrices = function (_BaseScript) {
                 return _context.abrupt('break', 26);
 
               case 26:
-                if (showBargain) {
-                  var _tmpItem$_auction = item.item._auction,
-                  currentBid = _tmpItem$_auction.currentBid,
-                  startingBid = _tmpItem$_auction.startingBid;
-				  var tmpActualBid = currentBid > 0 ? currentBid : startingBid;
-                  var tmpFutBinValue = futbinData[playerId].prices[platform].LCPrice.toString().replace(/[,.]/g, '');
-                  if (item.item._auction && (tmpFutBinValue / item.item._auction.buyNowPrice *100 > 110)) {
+                var _tmpItem$_auction = item.item._auction,
+                currentBid = _tmpItem$_auction.currentBid,
+                startingBid = _tmpItem$_auction.startingBid;
+                var tmpActualBid = currentBid > 0 ? currentBid : startingBid;
+                var tmpFutBinValue = futbinData[playerId].prices[platform].LCPrice.toString().replace(/[,.]/g, '');
+                if (showBargain) {                  
+                  if (item.item._auction && (tmpFutBinValue / item.item._auction.buyNowPrice *100 > (100+showBargainPercentage))) {
                     target.addClass('futbin-bargain');
                   }
-				  else if (item.item._auction && (tmpActualBid / tmpFutBinValue * 100 < 90)) {
-                    //target.addClass('futbin-bargain-bid');
+                }
+                if (showBargainBid) {
+                  if (item.item._auction && (tmpActualBid / tmpFutBinValue * 100 < (100-showBargainPercentage))) {
+                    target.addClass('futbin-bargain-bid');
                   }
                 }
 
