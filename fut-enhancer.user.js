@@ -12600,7 +12600,7 @@ var TransferMarket = exports.TransferMarket = function () {
         searchCriteria.level = enums.SearchLevel.GOLD;
       } else if (item.rareflag >= 3) {
         // 3 = TOTW
-        // if it is TOTW or other special, set it to TOTW. See enums.ItemRareType.
+        // if it is TOTW or other special, set it to TOTW. See enums.ItemRareType - changed to bronze/silver/gold
         // Can only search for "Specials", not more specific on Rare Type
         searchCriteria.level = enums.SearchLevel.GOLD;
       }
