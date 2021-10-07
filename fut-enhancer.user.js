@@ -1,14 +1,14 @@
 // ==UserScript==
 // @name        FUT Enhancer
-// @version     3.0.0
-// @description Enhances the FIFA Ultimate Team 21 Web app. Includes Futbin integration and other useful tools
+// @version     4.0.0
+// @description Enhances the FIFA Ultimate Team 22 Web app. Includes Futbin integration and other useful tools
 // @license     MIT
-// @author      Tim Klingeleers
+// @author      djizus - Tim Klingeleers
 // @match       https://www.ea.com/fifa/ultimate-team/web-app/*
 // @match       https://www.easports.com/*/fifa/ultimate-team/web-app/*
 // @match       https://www.ea.com/*/fifa/ultimate-team/web-app/*
-// @namespace   https://github.com/Mardaneus86
-// @supportURL  https://github.com/Mardaneus86/futwebapp-tampermonkey/issues
+// @namespace   https://github.com/djizus
+// @supportURL  https://github.com/djizus/futwebapp-tampermonkey/issues
 // @grant       GM_notification
 // @grant       GM_xmlhttpRequest
 // @grant       GM_getValue
@@ -17,8 +17,8 @@
 // @connect     ea.com
 // @connect     futbin.com
 // @connect     google-analytics.com
-// @updateURL   https://github.com/Mardaneus86/futwebapp-tampermonkey-web/raw/master/downloads/FUT_Enhancer.meta.js
-// @downloadURL https://github.com/Mardaneus86/futwebapp-tampermonkey-web/raw/master/downloads/FUT_Enhancer.user.js
+// @updateURL   https://github.com/djizus/futwebapp-tampermonkey-web/raw/master/downloads/FUT_Enhancer.meta.js
+// @downloadURL https://github.com/djizus/futwebapp-tampermonkey-web/raw/master/downloads/FUT_Enhancer.user.js
 // ==/UserScript==
 
 /******/ (function(modules) { // webpackBootstrap
@@ -133,6 +133,7 @@ $export.W = 32;  // wrap
 $export.U = 64;  // safe
 $export.R = 128; // real proto method for `library`
 module.exports = $export;
+
 
 
 /***/ }),
@@ -4687,7 +4688,7 @@ Object.defineProperty(exports, "__esModule", {
 /* global utils UTCurrencyInputControl */
 exports.default = {
   roundValueToNearestPriceTiers: function roundValueToNearestPriceTiers(value) {
-    var tier = utils.JS.find(UTCurrencyInputControl.PRICE_TIERS, function (i) {
+    var tier = JSUtils.find(UTCurrencyInputControl.PRICE_TIERS, function (i) {
       return value > i.min;
     });
 
@@ -4701,7 +4702,7 @@ exports.default = {
     return value + (tier.inc - diff);
   },
   roundDownToNearestPriceTiers: function roundDownToNearestPriceTiers(value) {
-    var tier = utils.JS.find(UTCurrencyInputControl.PRICE_TIERS, function (i) {
+    var tier = JSUtils.find(UTCurrencyInputControl.PRICE_TIERS, function (i) {
       return value > i.min;
     });
 
@@ -4713,7 +4714,7 @@ exports.default = {
     return value - diff;
   },
   determineListPrice: function determineListPrice(start, buyNow) {
-    var tier = utils.JS.find(UTCurrencyInputControl.PRICE_TIERS, function (i) {
+    var tier = JSUtils.find(UTCurrencyInputControl.PRICE_TIERS, function (i) {
       return buyNow > i.min;
     });
 
@@ -12587,27 +12588,29 @@ var TransferMarket = exports.TransferMarket = function () {
       var searchCriteria = new UTSearchCriteriaDTO();
 
       searchCriteria.count = 30;
-      searchCriteria.maskedDefId = item.getMaskedResourceId();
+
+	  //this._logger.log('Log test ' + JSON.stringify(item, getCircularReplacer()), 'Core - Transfermarket');
+	  searchCriteria.maskedDefId = item.definitionId;
       searchCriteria.type = item.type;
 
       if (item.rareflag === 47) {
         // 47 = Champions
         // if it is a Champions card, this is seen as a gold card
         // Can only search for "Gold" in this case
-        searchCriteria.level = factories.DataProvider.getItemLevelDP(true).filter(function (d) {
+        searchCriteria.level = UTDataProviderFactory.prototype.getItemLevelDP(true).filter(function (d) {
           return d.id === 2;
         })[0].value;
       } else if (item.rareflag >= 3) {
         // 3 = TOTW
         // if it is TOTW or other special, set it to TOTW. See enums.ItemRareType.
         // Can only search for "Specials", not more specific on Rare Type
-        searchCriteria.level = factories.DataProvider.getItemLevelDP(true).filter(function (d) {
+        searchCriteria.level = UTDataProviderFactory.prototype.getItemLevelDP(true).filter(function (d) {
           return d.id === 3;
         })[0].value;
       }
 
-      searchCriteria.category = enums.SearchCategory.ANY;
-      searchCriteria.position = enums.SearchType.ANY;
+      searchCriteria.category = SearchCategory.ANY;
+      searchCriteria.position = SearchType.ANY;
       if (maxBuy !== -1) {
         searchCriteria.maxBuy = maxBuy;
       }
@@ -12817,7 +12820,7 @@ exports.default = {
 /* 361 */
 /***/ (function(module, exports) {
 
-module.exports = "<button class=\"futsettings-toggle standard mini call-to-action\">\n  <span class=btn-text></span>\n</button>\n\n<div class=futsettings>\n  <h1 class=settings-title>FUT Tampermonkey settings\n\n    <div style=float:right>\n      <a target=_blank href=https://www.paypal.me/timklingeleers rel=nofollow>\n        <img src=\"data:image/gif;base64,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\"/>\n      </a>\n    </div>\n  </h1>\n\n  <!-- settings are injected here automatically -->\n  <div id=settingspanel></div>\n\n  <footer>\n    <h3>Need help?</h3>\n    <p>Talk to us in the Gitter channel or report errors in the Github repository.\n      <ul>\n        <li>Gitter: <a target=_blank href=https://gitter.im/futwebapp-tampermonkey/Lobby>Talk in the Lobby</a></li>\n        <li>Github: <a target=_blank href=https://github.com/Mardaneus86/futwebapp-tampermonkey/issues>Add an issue</a></li>\n      </ul>\n    </p>\n    <hr/>\n    <h3>Enjoying this plugin?</h3>\n    <p>Consider a donation so this plugin can keep being improved.</p>\n    <p>\n      <a target=_blank href=https://www.paypal.me/timklingeleers rel=nofollow>\n        <img src=\"data:image/gif;base64,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\"/>\n      </a>\n    </p>\n  </footer>\n</div>\n";
+module.exports = "<button class=\"futsettings-toggle standard mini call-to-action\">\n  <span class=btn-text></span>\n</button>\n\n<div class=futsettings>\n  <h1 class=settings-title>FUT Tampermonkey settings\n\n    <div style=float:right>\n      <a target=_blank href=https://www.paypal.me/timklingeleers rel=nofollow>\n        <img src=\"data:image/gif;base64,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\"/>\n      </a>\n    </div>\n  </h1>\n\n  <!-- settings are injected here automatically -->\n  <div id=settingspanel></div>\n\n  <footer>\n    <h3>Need help?</h3>\n    <p>Talk to us in the Gitter channel or report errors in the Github repository.\n      <ul>\n        <li>Gitter: <a target=_blank href=https://gitter.im/futwebapp-tampermonkey/Lobby>Talk in the Lobby</a></li>\n        <li>Github: <a target=_blank href=https://github.com/djizus/futwebapp-tampermonkey/issues>Add an issue</a></li>\n      </ul>\n    </p>\n    <hr/>\n    <h3>Enjoying this plugin?</h3>\n    <p>Consider a donation so this plugin can keep being improved.</p>\n    <p>\n      <a target=_blank href=https://www.paypal.me/timklingeleers rel=nofollow>\n        <img src=\"data:image/gif;base64,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\"/>\n      </a>\n    </p>\n  </footer>\n</div>\n";
 
 /***/ }),
 /* 362 */
@@ -13097,11 +13100,11 @@ var MinBin = function (_BaseScript) {
 
           var selectedItem = this._getSelectedItem();
 
-          if (selectedItem == null || selectedItem.resourceId === 0) {
+          if (selectedItem == null || selectedItem.definitionId === 0) {
             return;
           }
           var knownPlayerPrice = this._playerPrices.find(function (p) {
-            return p.resourceId === selectedItem.resourceId;
+            return p.definitionId === selectedItem.definitionId;
           });
           var price = '';
           if (knownPlayerPrice != null) {
@@ -13109,7 +13112,7 @@ var MinBin = function (_BaseScript) {
 
             this._updateListPrice(knownPlayerPrice.minimumBin);
           }
-          $(mutation.target).find('.DetailPanel > .ut-button-group').prepend('<button id="searchMinBin" data-resource-id="' + selectedItem.resourceId + '" class="list"><span class="btn-text">Search minimum BIN ' + price + '</span><span class="btn-subtext"></span></button>');
+          $(mutation.target).find('.DetailPanel > .ut-button-group').prepend('<button id="searchMinBin" data-resource-id="' + selectedItem.definitionId + '" class="list"><span class="btn-text">Search minimum BIN ' + price + '</span><span class="btn-subtext"></span></button>');
 
           $('#searchMinBin').bind('click', _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
             var btn, settings, minimumBin, playerPrice, notificationText;
@@ -13128,14 +13131,14 @@ var MinBin = function (_BaseScript) {
                   case 6:
                     minimumBin = _context.sent;
                     playerPrice = _this4._playerPrices.find(function (p) {
-                      return p.resourceId === btn.data('resource-id');
+                      return p.definitionId === btn.data('resource-id');
                     });
 
                     if (playerPrice != null) {
                       _this4._playerPrices.splice(_this4._playerPrices.indexOf(playerPrice), 1);
                     }
                     _this4._playerPrices.push({
-                      resourceId: btn.data('resource-id'),
+                      definitionId: btn.data('resource-id'),
                       minimumBin: minimumBin
                     });
 
@@ -13143,7 +13146,7 @@ var MinBin = function (_BaseScript) {
 
                     notificationText = 'Minimum BIN found for ' + selectedItem._staticData.name + ' is ' + minimumBin;
 
-                    if (btn.data('resource-id') === selectedItem.resourceId) {
+                    if (btn.data('resource-id') === selectedItem.definitionId) {
                       if (minimumBin === 0) {
                         btn.find('.btn-text').html('Search minimum BIN (extinct)');
                         notificationText = 'Minimum BIN not found for ' + selectedItem._staticData.name + ', card may be extinct';
@@ -13485,18 +13488,18 @@ var ListSize = function (_BaseScript) {
 
       var itemsOnMarket = parseInt(this.getSettings()['items-per-page-transfermarket'], 10);
       var itemsOnClub = parseInt(this.getSettings()['items-per-page-club'], 10);
-      var configObj = gConfigurationModel.getConfigObject(models.ConfigurationModel.KEY_ITEMS_PER_PAGE);
-      configObj[models.ConfigurationModel.ITEMS_PER_PAGE.TRANSFER_MARKET] = itemsOnMarket;
-      configObj[models.ConfigurationModel.ITEMS_PER_PAGE.CLUB] = itemsOnClub;
+      var configObj = getAppMain().getConfigRepository().getConfigObject(EAConfigurationRepository.KEY_ITEMS_PER_PAGE);
+      configObj[EAConfigurationRepository.ITEMS_PER_PAGE.TRANSFER_MARKET] = itemsOnMarket;
+      configObj[EAConfigurationRepository.ITEMS_PER_PAGE.CLUB] = itemsOnClub;
     }
   }, {
     key: '_stop',
     value: function _stop() {
       this._running = false;
 
-      var configObj = gConfigurationModel.getConfigObject(models.ConfigurationModel.KEY_ITEMS_PER_PAGE);
-      configObj[models.ConfigurationModel.ITEMS_PER_PAGE.TRANSFER_MARKET] = 15;
-      configObj[models.ConfigurationModel.ITEMS_PER_PAGE.CLUB] = 45;
+      var configObj = gConfigurationModel.getConfigObject(EAConfigurationRepository.KEY_ITEMS_PER_PAGE);
+      configObj[EAConfigurationRepository.ITEMS_PER_PAGE.TRANSFER_MARKET] = 15;
+      configObj[EAConfigurationRepository.ITEMS_PER_PAGE.CLUB] = 45;
     }
   }]);
 
@@ -14012,24 +14015,24 @@ var FutbinPrices = exports.FutbinPrices = function (_BaseScript) {
 
       var showBargains = this.getSettings()['show-bargains'].toString() === 'true';
 
-      var resourceIdMapping = [];
+      var definitionIdMapping = [];
 
       listrows.filter(function (row) {
-        return row.data.type === 'player' && row.data.resourceId !== 0;
+        return row.data.type === 'player' && row.data.definitionId !== 0;
       }).forEach(function (row, index) {
         $(row.__auction).show();
-        resourceIdMapping.push({
+        definitionIdMapping.push({
           target: uiItems[index] || row.target,
-          playerId: row.data.resourceId,
+          playerId: row.data.definitionId,
           item: row.data
         });
-      });
+      });	  
 
       var fetchedPlayers = 0;
       var fetchAtOnce = 30;
       var futbinlist = [];
-      while (resourceIdMapping.length > 0 && fetchedPlayers < resourceIdMapping.length && _core.Database.get('lastFutbinFetchFail', 0) + 5 * 60000 < Date.now()) {
-        var futbinUrl = 'https://www.futbin.com/21/playerPrices?player=&rids=' + resourceIdMapping.slice(fetchedPlayers, fetchedPlayers + fetchAtOnce).map(function (i) {
+      while (definitionIdMapping.length > 0 && fetchedPlayers < definitionIdMapping.length && _core.Database.get('lastFutbinFetchFail', 0) + 5 * 60000 < Date.now()) {
+        var futbinUrl = 'https://www.futbin.com/22/playerPrices?player=&rids=' + definitionIdMapping.slice(fetchedPlayers, fetchedPlayers + fetchAtOnce).map(function (i) {
           return i.playerId;
         }).filter(function (current, next) {
           return current !== next && current !== 0;
@@ -14047,7 +14050,7 @@ var FutbinPrices = exports.FutbinPrices = function (_BaseScript) {
             }
 
             var futbinData = JSON.parse(res.response);
-            resourceIdMapping.forEach(function (item) {
+            definitionIdMapping.forEach(function (item) {
               FutbinPrices._showFutbinPrice(screen, item, futbinData, showBargains);
               futbinlist.push(futbinData[item.playerId]);
             });
@@ -14134,9 +14137,13 @@ var FutbinPrices = exports.FutbinPrices = function (_BaseScript) {
                 return _context.abrupt('break', 26);
 
               case 26:
-
                 if (showBargain) {
-                  if (item.item._auction && item.item._auction.buyNowPrice < futbinData[playerId].prices[platform].LCPrice.toString().replace(/[,.]/g, '')) {
+                  var _tmpItem$_auction = item.item._auction,
+                  currentBid = _tmpItem$_auction.currentBid,
+                  startingBid = _tmpItem$_auction.startingBid;
+				  var tmpActualBid = currentBid > 0 ? currentBid : startingBid;
+                  var tmpFutBinValue = futbinData[playerId].prices[platform].LCPrice.toString().replace(/[,.]/g, '');
+                  if (item.item._auction && (tmpFutBinValue / item.item._auction.buyNowPrice *100 > 110 || tmpActualBid / tmpFutBinValue * 100 < 90)) {
                     target.addClass('futbin-bargain');
                   }
                 }
@@ -14245,14 +14252,14 @@ var FutbinPlayerLinks = exports.FutbinPlayerLinks = function (_BaseScript) {
           }
 
           var selectedItem = this._getSelectedItem();
-          if (selectedItem == null || selectedItem.resourceId === 0) {
+          if (selectedItem == null || selectedItem.definitionId === 0) {
             return;
           }
 
           var futbinPlayerLink = $(mutation.target).find('#futbinPlayerLink');
           futbinPlayerLink.remove();
 
-          $(mutation.target).find('.DetailPanel > .ut-button-group').prepend('<button id="futbinPlayerLink" data-resource-id="' + selectedItem.resourceId + '" class="list"><span class="btn-text">View on Futbin</span><span class="btn-subtext"></span></button>');
+          $(mutation.target).find('.DetailPanel > .ut-button-group').prepend('<button id="futbinPlayerLink" data-resource-id="' + selectedItem.definitionId + '" class="list"><span class="btn-text">View on Futbin</span><span class="btn-subtext"></span></button>');
 
           $('#futbinPlayerLink').bind('click', _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
             var btn, futbinLink;
@@ -14272,7 +14279,7 @@ var FutbinPlayerLinks = exports.FutbinPlayerLinks = function (_BaseScript) {
 
                     selectedItem = _this3._getSelectedItem();
                     btn = $('#futbinPlayerLink');
-                    if (btn.data('resource-id') === selectedItem.resourceId) {
+                    if (btn.data('resource-id') === selectedItem.definitionId) {
                       if (futbinLink) {
                         btn.find('.btn-text').html('View on Futbin');
                         _core.analytics.trackEvent('Futbin', 'Show player on Futbin', btn.data('resource-id'));
@@ -14324,14 +14331,14 @@ var FutbinPlayerLinks = exports.FutbinPlayerLinks = function (_BaseScript) {
 
         var futbinPlayerIds = _core.Database.getJson('futbin-player-ids', []);
         var futbinPlayer = futbinPlayerIds.find(function (i) {
-          return i.id === item.resourceId;
+          return i.id === item.definitionId;
         });
         if (futbinPlayer != null) {
-          return resolve('https://www.futbin.com/21/player/' + futbinPlayer.futbinId);
+          return resolve('https://www.futbin.com/22/player/' + futbinPlayer.futbinId);
         }
 
         var name = (item._staticData.firstName + ' ' + item._staticData.lastName).replace(' ', '+');
-        var url = 'https://www.futbin.com/search?year=21&term=' + name;
+        var url = 'https://www.futbin.com/search?year=22&term=' + name;
         return GM_xmlhttpRequest({
           method: 'GET',
           url: url,
@@ -14351,18 +14358,18 @@ var FutbinPlayerLinks = exports.FutbinPlayerLinks = function (_BaseScript) {
             if (exactPlayers.length === 1) {
               futbinPlayerIds = _core.Database.getJson('futbin-player-ids', []);
               if (futbinPlayerIds.find(function (i) {
-                return i.id === item.resourceId;
+                return i.id === item.definitionId;
               }) == null) {
                 futbinPlayerIds.push({
-                  id: item.resourceId,
+                  id: item.definitionId,
                   futbinId: exactPlayers[0].id
                 });
               }
               _core.Database.setJson('futbin-player-ids', futbinPlayerIds);
-              return resolve('https://www.futbin.com/21/player/' + exactPlayers[0].id);
+              return resolve('https://www.futbin.com/22/player/' + exactPlayers[0].id);
             } else if (exactPlayers.length > 1) {
               // Take first one, several players are returned more than once
-              return resolve('https://www.futbin.com/21/player/' + exactPlayers[0].id);
+              return resolve('https://www.futbin.com/22/player/' + exactPlayers[0].id);
             }
 
             return resolve(null); // TODO: what should we do if we find more than one?
@@ -14457,7 +14464,7 @@ var InstantBinConfirm = exports.InstantBinConfirm = function (_BaseScript) {
 
       utils.PopupManager.ShowConfirmation = function (dialog, amount, proceed, s) {
         var cancel = s;
-        if (!utils.JS.isFunction(s)) {
+        if (!JSUtils.isFunction(s)) {
           cancel = function cancel() {};
         }
 
