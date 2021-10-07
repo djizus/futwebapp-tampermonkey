@@ -12449,7 +12449,6 @@ var TransferMarket = exports.TransferMarket = function () {
             switch (_context7.prev = _context7.next) {
               case 0:
                 minBuy = 99999999;
-				console.log("on arrive à _defineSearchCriteria")
                 searchCriteria = this._defineSearchCriteria(item);
                 valuesFound = [];
                 minBuyFound = false;
@@ -12594,23 +12593,18 @@ var TransferMarket = exports.TransferMarket = function () {
 
 	  searchCriteria.maskedDefId = item.definitionId;
       searchCriteria.type = item.type;
-	  console.log('Log test rareflag');
-	  console.log(item.rareflag);
       if (item.rareflag === 47) {
         // 47 = Champions
         // if it is a Champions card, this is seen as a gold card
         // Can only search for "Gold" in this case
-        console.log('Log test rareflag 47');
         searchCriteria.level = enums.SearchLevel.GOLD;
       } else if (item.rareflag >= 3) {
         // 3 = TOTW
         // if it is TOTW or other special, set it to TOTW. See enums.ItemRareType.
         // Can only search for "Specials", not more specific on Rare Type
-        console.log('Log test rareflag 3');
         searchCriteria.level = enums.SearchLevel.GOLD;
       }
 
-	  console.log('Log test category & position');
       searchCriteria.category = SearchCategory.ANY;
       searchCriteria.position = SearchType.ANY;
       if (maxBuy !== -1) {
