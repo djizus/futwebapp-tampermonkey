@@ -129,7 +129,7 @@ export class TransferMarket {
   async _findLowUp(item, itemsForMean) {
     const searchCriteria = this._defineSearchCriteria(item, 200);
     await PinEvent.sendPageView('Transfer Market Search');
-    await utils.sleep(3000);
+    await utils.sleep(2900);
     await PinEvent.sendPageView('Transfer Market Results - List View', 0);
     await PinEvent.sendPageView('Item - Detail View', 0);
     const items = await this._find(searchCriteria);
@@ -204,18 +204,18 @@ export class TransferMarket {
     const searchCriteria = new UTSearchCriteriaDTO();
 
     searchCriteria.count = 30;
-    searchCriteria.maskedDefId = item.getMaskedResourceId();
+    searchCriteria.maskedDefId = item.definitionId;
     searchCriteria.type = item.type;
 
     if (item.rareflag === 47) { // 47 = Champions
       // if it is a Champions card, this is seen as a gold card
       // Can only search for "Gold" in this case
-      searchCriteria.level = factories.DataProvider.getItemLevelDP(true)
+      searchCriteria.level = UTDataProviderFactory.prototype.getItemLevelDP(true)
         .filter(d => d.id === 2)[0].value;
     } else if (item.rareflag >= 3) { // 3 = TOTW
       // if it is TOTW or other special, set it to TOTW. See enums.ItemRareType.
       // Can only search for "Specials", not more specific on Rare Type
-      searchCriteria.level = factories.DataProvider.getItemLevelDP(true)
+      searchCriteria.level = UTDataProviderFactory.prototype.getItemLevelDP(true)
         .filter(d => d.id === 3)[0].value;
     }
 

@@ -26,7 +26,7 @@ export class InstantBinConfirm extends BaseScript {
 
     utils.PopupManager.ShowConfirmation = (dialog, amount, proceed, s) => {
       let cancel = s;
-      if (!utils.JS.isFunction(s)) {
+      if (!JSUtils.isFunction(s)) {
         cancel = function () { };
       }
 

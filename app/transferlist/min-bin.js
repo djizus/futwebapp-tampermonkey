@@ -56,18 +56,18 @@ class MinBin extends BaseScript {
 
         let selectedItem = this._getSelectedItem();
 
-        if (selectedItem == null || selectedItem.resourceId === 0) {
+        if (selectedItem == null || selectedItem.definitionId === 0) {
           return;
         }
         const knownPlayerPrice = this._playerPrices
-          .find(p => p.resourceId === selectedItem.resourceId);
+          .find(p => p.definitionId === selectedItem.definitionId);
         let price = '';
         if (knownPlayerPrice != null) {
           price = `(${knownPlayerPrice.minimumBin})`;
 
           this._updateListPrice(knownPlayerPrice.minimumBin);
         }
-        $(mutation.target).find('.DetailPanel > .ut-button-group').prepend(`<button id="searchMinBin" data-resource-id="${selectedItem.resourceId}" class="list"><span class="btn-text">Search minimum BIN ${price}</span><span class="btn-subtext"></span></button>`);
+        $(mutation.target).find('.DetailPanel > .ut-button-group').prepend(`<button id="searchMinBin" data-resource-id="${selectedItem.definitionId}" class="list"><span class="btn-text">Search minimum BIN ${price}</span><span class="btn-subtext"></span></button>`);
 
         $('#searchMinBin').bind('click', async () => {
           const btn = $('#searchMinBin');
@@ -75,19 +75,19 @@ class MinBin extends BaseScript {
           analytics.trackEvent('Min BIN', 'Search Min BIN', btn.data('resource-id'));
           const settings = this.getSettings();
           const minimumBin = await new TransferMarket().searchMinBuy(selectedItem, parseInt(settings['mean-count'], 10));
-          const playerPrice = this._playerPrices.find(p => p.resourceId === btn.data('resource-id'));
+          const playerPrice = this._playerPrices.find(p => p.definitionId === btn.data('resource-id'));
           if (playerPrice != null) {
             this._playerPrices.splice(this._playerPrices.indexOf(playerPrice), 1);
           }
           this._playerPrices.push({
-            resourceId: btn.data('resource-id'),
+            definitionId: btn.data('resource-id'),
             minimumBin,
           });
 
           selectedItem = this._getSelectedItem();
 
           let notificationText = `Minimum BIN found for ${selectedItem._staticData.name} is ${minimumBin}`;
-          if (btn.data('resource-id') === selectedItem.resourceId) {
+          if (btn.data('resource-id') === selectedItem.definitionId) {
             if (minimumBin === 0) {
               btn.find('.btn-text').html('Search minimum BIN (extinct)');
               notificationText = `Minimum BIN not found for ${selectedItem._staticData.name}, card may be extinct`;

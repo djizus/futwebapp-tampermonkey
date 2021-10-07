@@ -242,15 +242,15 @@ export class FutbinPrices extends BaseScript {
 
     const showBargains = (this.getSettings()['show-bargains'].toString() === 'true');
 
-    const resourceIdMapping = [];
+    const definitionIdMapping = [];
 
     listrows
-      .filter(row => row.data.type === 'player' && row.data.resourceId !== 0)
+      .filter(row => row.data.type === 'player' && row.data.definitionId !== 0)
       .forEach((row, index) => {
         $(row.__auction).show();
-        resourceIdMapping.push({
+        definitionIdMapping.push({
           target: uiItems[index] || row.target,
-          playerId: row.data.resourceId,
+          playerId: row.data.definitionId,
           item: row.data,
         });
       });
@@ -258,9 +258,9 @@ export class FutbinPrices extends BaseScript {
     let fetchedPlayers = 0;
     const fetchAtOnce = 30;
     const futbinlist = [];
-    while (resourceIdMapping.length > 0 && fetchedPlayers < resourceIdMapping.length && Database.get('lastFutbinFetchFail', 0) + (5 * 60000) < Date.now()) {
-      const futbinUrl = `https://www.futbin.com/21/playerPrices?player=&rids=${
-        resourceIdMapping.slice(fetchedPlayers, fetchedPlayers + fetchAtOnce)
+    while (definitionIdMapping.length > 0 && fetchedPlayers < definitionIdMapping.length && Database.get('lastFutbinFetchFail', 0) + (5 * 60000) < Date.now()) {
+      const futbinUrl = `https://www.futbin.com/22/playerPrices?player=&rids=${
+        definitionIdMapping.slice(fetchedPlayers, fetchedPlayers + fetchAtOnce)
           .map(i => i.playerId)
           .filter((current, next) => current !== next && current !== 0)
           .join(',')
@@ -278,7 +278,7 @@ export class FutbinPrices extends BaseScript {
           }
 
           const futbinData = JSON.parse(res.response);
-          resourceIdMapping.forEach((item) => {
+          definitionIdMapping.forEach((item) => {
             FutbinPrices._showFutbinPrice(screen, item, futbinData, showBargains);
             futbinlist.push(futbinData[item.playerId]);
           });
@@ -369,11 +369,15 @@ export class FutbinPrices extends BaseScript {
       // no need to do anything
     }
 
-    if (showBargain) {
-      if (item.item._auction &&
-        item.item._auction.buyNowPrice < futbinData[playerId].prices[platform].LCPrice.toString().replace(/[,.]/g, '')) {
-        target.addClass('futbin-bargain');
-      }
-    }
+	if (showBargain) {
+	  var _tmpItem$_auction = item.item._auction,
+	  currentBid = _tmpItem$_auction.currentBid,
+	  startingBid = _tmpItem$_auction.startingBid;
+	  var tmpActualBid = currentBid > 0 ? currentBid : startingBid;
+	  var tmpFutBinValue = futbinData[playerId].prices[platform].LCPrice.toString().replace(/[,.]/g, '');
+	  if (item.item._auction && (tmpFutBinValue / item.item._auction.buyNowPrice *100 > 110 || tmpActualBid / tmpFutBinValue * 100 < 90)) {
+		target.addClass('futbin-bargain');
+	  }
+	}
   }
 }

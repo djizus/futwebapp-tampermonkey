@@ -46,14 +46,14 @@ export class FutbinPlayerLinks extends BaseScript {
         }
 
         let selectedItem = this._getSelectedItem();
-        if (selectedItem == null || selectedItem.resourceId === 0) {
+        if (selectedItem == null || selectedItem.definitionId === 0) {
           return;
         }
 
         const futbinPlayerLink = $(mutation.target).find('#futbinPlayerLink');
         futbinPlayerLink.remove();
 
-        $(mutation.target).find('.DetailPanel > .ut-button-group').prepend(`<button id="futbinPlayerLink" data-resource-id="${selectedItem.resourceId}" class="list"><span class="btn-text">View on Futbin</span><span class="btn-subtext"></span></button>`);
+        $(mutation.target).find('.DetailPanel > .ut-button-group').prepend(`<button id="futbinPlayerLink" data-resource-id="${selectedItem.definitionId}" class="list"><span class="btn-text">View on Futbin</span><span class="btn-subtext"></span></button>`);
 
         $('#futbinPlayerLink').bind('click', async () => {
           let btn = $('#futbinPlayerLink');
@@ -62,7 +62,7 @@ export class FutbinPlayerLinks extends BaseScript {
 
           selectedItem = this._getSelectedItem();
           btn = $('#futbinPlayerLink');
-          if (btn.data('resource-id') === selectedItem.resourceId) {
+          if (btn.data('resource-id') === selectedItem.definitionId) {
             if (futbinLink) {
               btn.find('.btn-text').html('View on Futbin');
               analytics.trackEvent('Futbin', 'Show player on Futbin', btn.data('resource-id'));
@@ -83,9 +83,9 @@ export class FutbinPlayerLinks extends BaseScript {
       }
 
       let futbinPlayerIds = Database.getJson('futbin-player-ids', []);
-      const futbinPlayer = futbinPlayerIds.find(i => i.id === item.resourceId);
+      const futbinPlayer = futbinPlayerIds.find(i => i.id === item.definitionId);
       if (futbinPlayer != null) {
-        return resolve(`https://www.futbin.com/21/player/${futbinPlayer.futbinId}`);
+        return resolve(`https://www.futbin.com/22/player/${futbinPlayer.futbinId}`);
       }
 
       const name = `${item._staticData.firstName} ${item._staticData.lastName}`.replace(' ', '+');
@@ -107,17 +107,17 @@ export class FutbinPlayerLinks extends BaseScript {
           }
           if (exactPlayers.length === 1) {
             futbinPlayerIds = Database.getJson('futbin-player-ids', []);
-            if (futbinPlayerIds.find(i => i.id === item.resourceId) == null) {
+            if (futbinPlayerIds.find(i => i.id === item.definitionId) == null) {
               futbinPlayerIds.push({
-                id: item.resourceId,
+                id: item.definitionId,
                 futbinId: exactPlayers[0].id,
               });
             }
             Database.setJson('futbin-player-ids', futbinPlayerIds);
-            return resolve(`https://www.futbin.com/21/player/${exactPlayers[0].id}`);
+            return resolve(`https://www.futbin.com/22/player/${exactPlayers[0].id}`);
           } else if (exactPlayers.length > 1) {
             // Take first one, several players are returned more than once
-            return resolve(`https://www.futbin.com/21/player/${exactPlayers[0].id}`);
+            return resolve(`https://www.futbin.com/22/player/${exactPlayers[0].id}`);
           }
 
           return resolve(null); // TODO: what should we do if we find more than one?
