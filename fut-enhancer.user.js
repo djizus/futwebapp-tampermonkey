@@ -14053,7 +14053,7 @@ var FutbinPrices = exports.FutbinPrices = function (_BaseScript) {
             });
             var platform = _fut.utils.getPlatform();
             if (screen === 'SBCSquadSplitViewController' || screen === 'SquadSplitViewController' || screen === 'UTSquadSplitViewController' || screen === 'UTSBCSquadSplitViewController') {
-              var futbinTotal = futbinlist.reduce(function (sum, item) {
+				var futbinTotal = futbinlist.reduce(function (sum, item) {
                 return sum + parseInt(item.prices[platform].LCPrice.toString().replace(/[,.]/g, ''), 10) || 0;
               }, 0);
               $('.ut-squad-summary-value.coins.value').html('' + futbinTotal.toLocaleString());
@@ -14138,7 +14138,10 @@ var FutbinPrices = exports.FutbinPrices = function (_BaseScript) {
                 currentBid = _tmpItem$_auction.currentBid,
                 startingBid = _tmpItem$_auction.startingBid;
                 var tmpActualBid = currentBid > 0 ? currentBid : startingBid;
-                var tmpFutBinValue = futbinData[playerId].prices[platform].LCPrice.toString().replace(/[,.]/g, '');
+                var tmpFutBinValue = futbinData[playerId].prices[platform].LCPrice.toString().replace(/[,.]/g, '');				
+				if (screen === 'UTMarketSearchResultsSplitViewController') {
+					$('.pagingContainer').css('display', '');
+				}
                 if (showBargain) {                  
                   if (item.item._auction && (tmpFutBinValue / item.item._auction.buyNowPrice *100 > (100+showBargainPercentage))) {
                     target.addClass('futbin-bargain');
