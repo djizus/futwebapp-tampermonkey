@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        FUT Enhancer
-// @version     4.0.4
+// @version     4.0.5
 // @description Enhances the FIFA Ultimate Team 22 Web app. Includes Futbin integration and other useful tools
 // @license     MIT
 // @author      djizus - Tim Klingeleers
