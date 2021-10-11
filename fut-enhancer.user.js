@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        FUT Enhancer
-// @version     4.0.2
+// @version     4.0.4
 // @description Enhances the FIFA Ultimate Team 22 Web app. Includes Futbin integration and other useful tools
 // @license     MIT
 // @author      djizus - Tim Klingeleers
@@ -12593,16 +12593,15 @@ var TransferMarket = exports.TransferMarket = function () {
 
 	  searchCriteria.maskedDefId = item.definitionId;
       searchCriteria.type = item.type;
-      if (item.rareflag === 47) {
-        // 47 = Champions
-        // if it is a Champions card, this is seen as a gold card
+      if (item.rareflag === 47 || item.rareflag == 3) {
+        // 47 = Champions ; 3 = TOTW
+        // if it is a Champions card or a TOTW, this is seen as a gold card
         // Can only search for "Gold" in this case
         searchCriteria.level = enums.SearchLevel.GOLD;
-      } else if (item.rareflag >= 3) {
-        // 3 = TOTW
-        // if it is TOTW or other special, set it to TOTW. See enums.ItemRareType - changed to bronze/silver/gold
+      } else if (item.rareflag > 3) {
+        // If the card rare flag is > 3 then it is a special card
         // Can only search for "Specials", not more specific on Rare Type
-        searchCriteria.level = enums.SearchLevel.GOLD;
+        searchCriteria.level = enums.SearchLevel.SPECIAL;
       }
 
       searchCriteria.category = SearchCategory.ANY;
