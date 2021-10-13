@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        FUT Enhancer
-// @version     4.0.5
+// @version     4.0.6
 // @description Enhances the FIFA Ultimate Team 22 Web app. Includes Futbin integration and other useful tools
 // @license     MIT
 // @author      djizus - Tim Klingeleers
@@ -12593,13 +12593,14 @@ var TransferMarket = exports.TransferMarket = function () {
 
 	  searchCriteria.maskedDefId = item.definitionId;
       searchCriteria.type = item.type;
-      if (item.rareflag === 47 || item.rareflag == 3) {
-        // 47 = Champions ; 3 = TOTW
-        // if it is a Champions card or a TOTW, this is seen as a gold card
+      if (item.rareflag === 47) {
+        // 47 = Champions
+        // if it is a Champions card, this is seen as a gold card
         // Can only search for "Gold" in this case
         searchCriteria.level = enums.SearchLevel.GOLD;
-      } else if (item.rareflag > 3) {
-        // If the card rare flag is > 3 then it is a special card
+      } else if (item.rareflag >= 3) {
+        // 3 = TOTW
+        // if the card rare flag is > 3 then it is a special card
         // Can only search for "Specials", not more specific on Rare Type
         searchCriteria.level = enums.SearchLevel.SPECIAL;
       }
@@ -14138,18 +14139,19 @@ var FutbinPrices = exports.FutbinPrices = function (_BaseScript) {
                 currentBid = _tmpItem$_auction.currentBid,
                 startingBid = _tmpItem$_auction.startingBid;
                 var tmpActualBid = currentBid > 0 ? currentBid : startingBid;
-                var tmpFutBinValue = futbinData[playerId].prices[platform].LCPrice.toString().replace(/[,.]/g, '');				
+                var tmpFutBinValue = futbinData[playerId].prices[platform].LCPrice.toString().replace(/[,.]/g, '');		
+                var tmpFutBinValuePercentageApplied = tmpFutBinValue - (tmpFutBinValue * showBargainPercentage / 100);		
 				if (screen === 'UTMarketSearchResultsSplitViewController') {
 					$('.pagingContainer').css('display', '');
 				}
-                if (showBargain) {                  
-                  if (item.item._auction && (tmpFutBinValue / item.item._auction.buyNowPrice *100 > (100+showBargainPercentage))) {
+                if (showBargain) {
+                  if (item.item._auction && (item.item._auction.buyNowPrice <= tmpFutBinValuePercentageApplied)) {
                     target.addClass('futbin-bargain');
                   }
-                }
-                if (showBargainBid) {
-                  if (item.item._auction && (tmpActualBid / tmpFutBinValue * 100 < (100-showBargainPercentage))) {
-                    target.addClass('futbin-bargain-bid');
+                  if (showBargainBid) {
+                    if (item.item._auction && (tmpActualBid  <= tmpFutBinValuePercentageApplied)) {
+						target.addClass('futbin-bargain-bid');
+                    }
                   }
                 }
 
