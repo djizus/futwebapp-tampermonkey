@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        FUT Enhancer
-// @version     4.0.6
+// @version     4.0.7
 // @description Enhances the FIFA Ultimate Team 22 Web app. Includes Futbin integration and other useful tools
 // @license     MIT
 // @author      djizus - Tim Klingeleers
@@ -12924,12 +12924,10 @@ var RefreshTransferList = function (_BaseScript) {
           // market search
           setTimeout(function () {
             if ($('.pagingContainer').find('.refresh').length === 0) {
+              var listController = getAppMain().getRootViewController().getPresentedViewController().getCurrentViewController().getCurrentController()._listController;
+              var currentPage = listController._paginationViewModel._pageIndex;
               $('.pagingContainer').append('<button class="flat pagination refresh" style="float: right;">Refresh list</button>');
               $('.refresh').click(function () {
-                var listController = getAppMain().getRootViewController().getPresentedViewController().getCurrentViewController().getCurrentController()._listController;
-
-                var currentPage = listController._paginationViewModel._pageIndex;
-
                 listController._requestItems(currentPage);
               });
             }
@@ -14024,7 +14022,7 @@ var FutbinPrices = exports.FutbinPrices = function (_BaseScript) {
           playerId: row.data.definitionId,
           item: row.data
         });
-      });	  
+      });
 
       var fetchedPlayers = 0;
       var fetchAtOnce = 30;
@@ -14469,7 +14467,7 @@ var InstantBinConfirm = exports.InstantBinConfirm = function (_BaseScript) {
       _get(InstantBinConfirm.prototype.__proto__ || Object.getPrototypeOf(InstantBinConfirm.prototype), 'onScreenRequest', this).call(this, screenId);
       var settings = this.getSettings();
 
-      utils.PopupManager.ShowConfirmation = function (dialog, amount, proceed, s) {
+      utils.PopupManager.showConfirmation = function (dialog, amount, proceed, s) {
         var cancel = s;
         if (!JSUtils.isFunction(s)) {
           cancel = function cancel() {};
@@ -14481,7 +14479,7 @@ var InstantBinConfirm = exports.InstantBinConfirm = function (_BaseScript) {
         }
 
         var n = new EADialogViewController({
-          dialogOptions: [dialog.buttonLabels[0], dialog.buttonLabels[1]],
+          dialogOptions: [dialog.buttonOptions[0], dialog.buttonOptions[1]],
           message: services.Localization.localize(dialog.message, amount),
           title: services.Localization.localize(dialog.title)
         });
