@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        FUT Enhancer
-// @version     4.0.7
+// @version     4.0.8
 // @description Enhances the FIFA Ultimate Team 22 Web app. Includes Futbin integration and other useful tools
 // @license     MIT
 // @author      djizus - Tim Klingeleers
@@ -12924,10 +12924,10 @@ var RefreshTransferList = function (_BaseScript) {
           // market search
           setTimeout(function () {
             if ($('.pagingContainer').find('.refresh').length === 0) {
-              var listController = getAppMain().getRootViewController().getPresentedViewController().getCurrentViewController().getCurrentController()._listController;
-              var currentPage = listController._paginationViewModel._pageIndex;
               $('.pagingContainer').append('<button class="flat pagination refresh" style="float: right;">Refresh list</button>');
               $('.refresh').click(function () {
+                var listController = getAppMain().getRootViewController().getPresentedViewController().getCurrentViewController().getCurrentController()._listController;
+                var currentPage = listController._paginationViewModel._pageIndex;
                 listController._requestItems(currentPage);
               });
             }
