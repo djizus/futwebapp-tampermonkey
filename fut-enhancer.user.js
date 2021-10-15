@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        FUT Enhancer
-// @version     4.0.8
+// @version     4.1.0
 // @description Enhances the FIFA Ultimate Team 22 Web app. Includes Futbin integration and other useful tools
 // @license     MIT
 // @author      djizus - Tim Klingeleers
@@ -10823,10 +10823,9 @@ var EventEmitter = function () {
 
 module.exports = EventEmitter;
 
-
 /***/ }),
 /* 347 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/(function(module, exports, __webpack_require__) {
 
 "use strict";
 
@@ -12087,8 +12086,8 @@ Object.defineProperty(exports, "__esModule", {
 exports.TransferMarket = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /* globals
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     enums factories communication gUserModel models repositories services
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     */
+                                                                      enums factories communication gUserModel models repositories services
+                                                                      */
 
 
 var _mathStatistics = __webpack_require__(357);
@@ -13018,8 +13017,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* globals
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               window $ document
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
+window $ document
+*/
 
 
 var MinBinSettings = exports.MinBinSettings = function (_SettingsEntry) {
@@ -13255,7 +13254,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* globals
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               window $ document */
+window $ document */
 
 var CardInfoSettings = exports.CardInfoSettings = function (_SettingsEntry) {
   _inherits(CardInfoSettings, _SettingsEntry);
@@ -13422,8 +13421,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* globals
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               gConfigurationModel models
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
+gConfigurationModel models
+*/
 
 var ListSizeSettings = exports.ListSizeSettings = function (_SettingsEntry) {
   _inherits(ListSizeSettings, _SettingsEntry);
@@ -13527,7 +13526,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* globals
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               window $ document */
+window $ document */
 
 var TransferTotalsSettings = exports.TransferTotalsSettings = function (_SettingsEntry) {
   _inherits(TransferTotalsSettings, _SettingsEntry);
@@ -13807,9 +13806,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* globals
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               $
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               window
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
+$
+window
+*/
 
 var FutbinPrices = exports.FutbinPrices = function (_BaseScript) {
   _inherits(FutbinPrices, _BaseScript);
@@ -14143,13 +14142,13 @@ var FutbinPrices = exports.FutbinPrices = function (_BaseScript) {
 					$('.pagingContainer').css('display', '');
 				}
                 if (showBargain) {
-                  if (item.item._auction && (item.item._auction.buyNowPrice <= tmpFutBinValuePercentageApplied)) {
-                    target.addClass('futbin-bargain');
-                  }
                   if (showBargainBid) {
                     if (item.item._auction && (tmpActualBid  <= tmpFutBinValuePercentageApplied)) {
 						target.addClass('futbin-bargain-bid');
                     }
+                  }
+                  if (item.item._auction && (item.item._auction.buyNowPrice <= tmpFutBinValuePercentageApplied)) {
+                    target.addClass('futbin-bargain');
                   }
                 }
 
@@ -14199,8 +14198,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* globals
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               window $ document
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
+window $ document
+*/
 
 
 var FutbinPlayerLinks = exports.FutbinPlayerLinks = function (_BaseScript) {
@@ -14434,13 +14433,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* global
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               gPopupClickShield
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               enums
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               EADialogViewController
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               services
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               utils
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+/* global gPopupClickShield enums EADialogViewController services utils */
 
 var InstantBinConfirm = exports.InstantBinConfirm = function (_BaseScript) {
   _inherits(InstantBinConfirm, _BaseScript);
@@ -14512,3 +14506,115 @@ var InstantBinConfirm = exports.InstantBinConfirm = function (_BaseScript) {
 
 /***/ })
 /******/ ]);
+// Script taken from : https://github.com/chithakumar13/Fifa21-PageJumper/blob/master/fifa_pagejumper.user.js and adapted to FUT 22 web app 
+// Original author : CK Algos
+(function () {
+    'use strict';
+
+    UTMarketSearchResultsViewController.prototype._requestItems = function (l) {
+        let pageVal = jQuery('#ab_page_number').val();
+        if (pageVal && !isNaN(pageVal)) {
+            l = parseInt(pageVal);
+        }
+
+        pageVal = jQuery('#ab_result_page_number').val();
+        if (pageVal && !isNaN(pageVal)) {
+            l = parseInt(pageVal);
+            jQuery('#ab_result_page_number').val('');
+        }
+
+        resultJumperInterface();
+
+        this._paginationViewModel.stopAuctionUpdates(),
+            services.Item.searchTransferMarket(this._searchCriteria, l).observe(this, function _onRequestItemsComplete(e, t) {
+                if (e.unobserve(this), !t.success)
+                    return NetworkErrorManager.checkCriticalStatus(t.status) ? void NetworkErrorManager.handleStatus(t.status) : (services.Notification.queue([services.Localization.localize("popup.error.searcherror"), UINotificationType.NEGATIVE]),
+                        void this.getNavigationController().popViewController());
+                if (0 < this._searchCriteria.offset && 0 === t.data.items.length)
+                    this._requestItems(l - 1);
+                else {
+                    var i = this._paginationViewModel.getNumItemsPerPage()
+                        , o = t.data.items.slice();
+                    if (this.onDataChange.notify({
+                        items: o
+                    }),
+                        o.length > i && (o = o.slice(0, i)),
+                        this._paginationViewModel.setPageItems(o),
+                        this._paginationViewModel.setPageIndex(l),
+                        this._selectedItem && 0 < o.length) {
+                        var n = this._paginationViewModel.getIndexByItemId(this._selectedItem.id);
+                        0 < n && this._paginationViewModel.setIndex(n),
+                            this._selectedItem = null
+                    }
+                    var s = this.getView()
+                        , r = null;
+                    if (!this._stadiumViewmodel || this._searchCriteria.type !== SearchType.VANITY && this._searchCriteria.type !== SearchType.CLUB_INFO && this._searchCriteria.type !== SearchType.BALL || (r = this._stadiumViewmodel.getStadiumProgression(this._searchCriteria.subtypes)),
+                        s.setItems(this._paginationViewModel.getCurrentPageItems(), r),
+                        s.setPaginationState(1 < l, t.data.items.length > i),
+                        JSUtils.isValid(this._compareItem) && !this._squadContext) {
+                        var a = JSUtils.find(o, function (e) {
+                            return e.getAuctionData().tradeId === this._compareItem.getAuctionData().tradeId
+                        }
+                            .bind(this));
+                        JSUtils.isValid(a) ? this._pinnedListItem.setItem(a) : this._paginationViewModel.setPinnedItem(this._compareItem)
+                    } else
+                        !isPhone() && 0 < o.length && s.selectListRow(this._paginationViewModel.getCurrentItem().id)
+                }
+                this._paginationViewModel.startAuctionUpdates()
+            })
+    }
+
+    window.UTSnipeFilterViewController = function () {
+        UTAppSettingsViewController.call(this);
+        this._jsClassName = 'UTSnipeFilterViewController';
+    };
+
+    JSUtils.inherits(UTSnipeFilterViewController, UTAppSettingsViewController);
+
+    window.jumperInterface = function () {
+        if (services.Localization && jQuery('h1.title').html() === services.Localization.localize("navbar.label.home")) {
+            window.hasLoadedAll = true;
+        }
+
+        if (window.hasLoadedAll && jQuery(".search-prices").length) {
+            if (jQuery('.search-prices').first().length) {
+                {
+                    if (!jQuery('#ab_page_number').length) {
+                        jQuery(".search-prices").first().append(`<div> 
+                            <div class="search-price-header"> 
+                                   <h1>Page Number:</h1>
+                            </div>
+                            <div class="price-filter"> 
+                                    <div class="ut-numeric-input-spinner-control">
+                                        <input type="tel" id="ab_page_number" class="numericInput" placeholder="1" /> 
+                                    </div> 
+                            </div> 
+                    </div>`
+                        );
+                    }
+                }
+            }
+        } else {
+            window.setTimeout(jumperInterface, 500);
+        }
+    }
+
+    window.resultJumperInterface = function () {
+        if (jQuery(".flat.pagination.prev").length) {
+            if (jQuery('.flat.pagination.prev').first().length) {
+                if (!jQuery('#ab_result_page_number').length) {
+                    jQuery(".flat.pagination.prev").first().after(`<div>  
+                            <div class="price-filter"> 
+                                    <div class="ut-numeric-input-spinner-control">
+                                        <input type="tel" id="ab_result_page_number" class="numericInput" placeholder="Next Page Number" /> 
+                                    </div> 
+                            </div> 
+                    </div>`
+                    );
+                }
+            }
+        }
+    }
+
+    jumperInterface();
+})();
