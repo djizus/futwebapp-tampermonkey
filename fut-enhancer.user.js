@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        FUT Enhancer
-// @version     4.1.0
+// @version     4.2.0
 // @description Enhances the FIFA Ultimate Team 22 Web app. Includes Futbin integration and other useful tools
 // @license     MIT
 // @author      djizus - Tim Klingeleers
@@ -13989,9 +13989,9 @@ var FutbinPrices = exports.FutbinPrices = function (_BaseScript) {
         });
       } else if (listController._view._list && listController._view._list.listRows && listController._view._list.listRows.length > 0) {
         listrows = listController._view._list.listRows; // for transfer market and club search
-      } else if (listController._view._sections && listController._view._sections.length > 0) {
+      } else if (listController._view.sections && listController._view.sections.length > 0) {
         // for transfer list & trade pile
-        listController._view._sections.forEach(function (row) {
+        listController._view.sections.forEach(function (row) {
           if (row.listRows.length > 0) {
             if (listrows == null) {
               listrows = row.listRows;
@@ -14576,7 +14576,7 @@ var InstantBinConfirm = exports.InstantBinConfirm = function (_BaseScript) {
             window.hasLoadedAll = true;
         }
 
-        if (window.hasLoadedAll && jQuery(".search-prices").length) {
+        if (jQuery(".search-prices").length) {
             if (jQuery('.search-prices').first().length) {
                 {
                     if (!jQuery('#ab_page_number').length) {
@@ -14615,6 +14615,5 @@ var InstantBinConfirm = exports.InstantBinConfirm = function (_BaseScript) {
             }
         }
     }
-
     jumperInterface();
 })();
