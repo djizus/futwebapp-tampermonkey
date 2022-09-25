@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        FUT Enhancer
-// @version     4.2.4
+// @version     4.2.5
 // @description Enhances the FIFA Ultimate Team 22 Web app. Includes Futbin integration and other useful tools
 // @license     MIT
 // @author      djizus - Tim Klingeleers
@@ -14055,7 +14055,8 @@ var FutbinPrices = exports.FutbinPrices = function (_BaseScript) {
 				  futbinData[item.playerId] = {};
 				  futbinData[item.playerId].prices = {};
 				  futbinData[item.playerId].prices[platform] = {};
-				  futbinData[item.playerId].prices[platform].LCPrice = parseInt(res[platform].slice(Math.max(res[platform].length - 3, 0)).map(a => { return a[1] }).reduce((a, b) => a + b, 0) / Math.min(res[platform].length, 3));
+				  var resFiltered = res[platform].filter(a => a[1] !== 0);
+				  futbinData[item.playerId].prices[platform].LCPrice = parseInt(resFiltered.slice(Math.max(resFiltered.length - 3, 0)).map(a => { return a[1] }).reduce((a, b) => a + b, 0) / Math.min(resFiltered.length, 3));
 				  FutbinPrices._showFutbinPrice(screen, item, futbinData, showBargains, showBargainsBid, showBargainsPercentage);
 				  futbinlist.push(futbinData[item.playerId]);
 				  if (screen === 'SBCSquadSplitViewController' || screen === 'SquadSplitViewController' || screen === 'UTSquadSplitViewController' || screen === 'UTSBCSquadSplitViewController') {
