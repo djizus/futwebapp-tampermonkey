@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        FUT Enhancer
-// @version     4.2.3
+// @version     4.2.4
 // @description Enhances the FIFA Ultimate Team 22 Web app. Includes Futbin integration and other useful tools
 // @license     MIT
 // @author      djizus - Tim Klingeleers
@@ -12400,7 +12400,7 @@ var TransferMarket = exports.TransferMarket = function () {
 
               case 3:
                 _context6.next = 5;
-                return _utils2.default.sleep(3000);
+                return _utils2.default.sleep(1000);
 
               case 5:
                 _context6.next = 7;
@@ -12466,7 +12466,7 @@ var TransferMarket = exports.TransferMarket = function () {
 
               case 7:
                 _context7.next = 9;
-                return _utils2.default.sleep(800);
+                return _utils2.default.sleep(400);
 
               case 9:
                 _context7.next = 11;
@@ -13032,7 +13032,7 @@ var MinBinSettings = exports.MinBinSettings = function (_SettingsEntry) {
 
     var _this = _possibleConstructorReturn(this, (MinBinSettings.__proto__ || Object.getPrototypeOf(MinBinSettings)).call(this, 'min-bin', 'Search minimum BIN'));
 
-    _this.addSetting('Amount of lowest BINs to determine minimum on', 'mean-count', 3, 'number');
+    _this.addSetting('Amount of lowest BINs to determine minimum on', 'mean-count', 2, 'number');
     _this.addSetting('Adjust quicklist panel price automatically based on minimum BIN', 'adjust-list-price', true, 'checkbox');
     _this.addSettingUnder('adjust-list-price', 'Start price percentage (0 to 100%)', 'start-price-percentage', 90, 'number');
     _this.addSettingUnder('adjust-list-price', 'Buy now price percentage (0 to 100%)', 'buy-now-price-percentage', 110, 'number');
@@ -13775,7 +13775,7 @@ exports = module.exports = __webpack_require__(47)(undefined);
 
 
 // module
-exports.push([module.i, "#TradePile .player-stats-data-component, #Unassigned .player-stats-data-component {\n  width: 12em; }\n\n#TradePile .listFUTItem .entityContainer, #Unassigned .listFUTItem .entityContainer {\n  width: 45%; }\n\n#Unassigned .listFUTItem .auction .auctionValue, #Unassigned .listFUTItem .auction .auction-state {\n  display: none; }\n\n#Unassigned .listFUTItem .auction .auctionValue.futbin {\n  display: block;\n  float: right; }\n\n.MyClubResults .listFUTItem .auction {\n  display: block;\n  position: absolute;\n  right: 0; }\n\n.MyClubResults .listFUTItem .auction .auctionValue, .MyClubResults .listFUTItem .auction .auction-state {\n  width: 24%;\n  float: right;\n  padding-right: 1%;\n  display: none; }\n\n.MyClubResults .listFUTItem .auction .auctionValue.futbin {\n  display: block; }\n\n.listFUTItem .auction > .auction-state, .listFUTItem .auction > .auctionStartPrice, .listFUTItem .auction > .auctionValue {\n  flex: 1 1 20%;\n  overflow: hidden; }\n\n.listFUTItem .auction {\n  top: 30%;\n  max-width: none;\n  width: 50%; }\n  .listFUTItem .auction .futbin .coins.value .time {\n    display: inline;\n    font-size: 1em; }\n\n@media (max-width: 1130px) {\n  .listFUTItem .auction {\n    width: auto; }\n  html[dir=ltr] .listFUTItem .auction {\n    left: auto; } }\n\n.ut-navigation-container-view.ui-layout-right .listFUTItem .auction {\n  top: 30%; }\n\n.futbinupdate {\n  font-size: 14px;\n  clear: both;\n  display: block; }\n\n.coins.value.futbin {\n  -webkit-filter: hue-rotate(165deg);\n  filter: hue-rotate(165deg); }\n\n.listFUTItem.has-auction-data.futbin-bargain .rowContent {\n  background-color: #7ffe9445; }\n\n.listFUTItem.has-auction-data.selected.futbin-bargain .rowContent, .listFUTItem.has-auction-data.selected.futbin-bargain .rowContent.active {\n  background-color: #7ffe94;\n  color: #434853; }\n\n.listFUTItem.has-auction-data.futbin-bargain-bid .rowContent {\n  background-color: #674ea7; }\n\n.listFUTItem.has-auction-data.selected.futbin-bargain-bid .rowContent, .listFUTItem.has-auction-data.selected.futbin-bargain-bid .rowContent.active {\n  background-color: #008080;\n  color: #434853; }\n\n.ut-club-search-results-view .listFUTItem .auction {\n  width: 10%; }\n\n.ut-club-search-results-view .auction-state, .ut-club-search-results-view .auctionValue {\n  display: none; }\n  .ut-club-search-results-view .auction-state.futbin, .ut-club-search-results-view .auctionValue.futbin {\n    display: block; }\n\n.player-picks-modal .time {\n  display: block; }\n\n.ut-squad-slot-pedestal-view.futbin {\n  min-width: 58px;\n  flex: none;\n  width: auto;\n  bottom: -2.6em;\n  white-space: nowrap; }\n  .ut-squad-slot-pedestal-view.futbin .coins.value {\n    text-align: center;\n    margin: 0 8px; }\n\n.ut-squad-overview .ut-squad-summary {\n  width: 70%; }\n\n.refresh-squad-button {\n  margin: 17px 5px;\n  color: #e2dde2; }\n  .refresh-squad-button:before {\n    font-family: UltimateTeam-Icons,sans-serif;\n    content: '\\E051'; }\n", ""]);
+exports.push([module.i, "#TradePile .player-stats-data-component, #Unassigned .player-stats-data-component {\n  width: 12em; }\n\n#TradePile .listFUTItem .entityContainer, #Unassigned .listFUTItem .entityContainer {\n  width: 45%; }\n\n#Unassigned .listFUTItem .auction .auctionValue, #Unassigned .listFUTItem .auction .auction-state {\n  display: none; }\n\n#Unassigned .listFUTItem .auction .auctionValue.futbin {\n  display: block;\n  float: right; }\n\n.MyClubResults .listFUTItem .auction {\n  display: block;\n  position: absolute;\n  right: 0; }\n\n.MyClubResults .listFUTItem .auction .auctionValue, .MyClubResults .listFUTItem .auction .auction-state {\n  width: 24%;\n  float: right;\n  padding-right: 1%;\n  display: none; }\n\n.MyClubResults .listFUTItem .auction .auctionValue.futbin {\n  display: block; }\n\n.listFUTItem .auction > .auction-state, .listFUTItem .auction > .auctionStartPrice, .listFUTItem .auction > .auctionValue {\n  flex: 1 1 20%;\n  overflow: hidden; }\n\n.listFUTItem .auction {\n  top: 30%;\n  max-width: none;\n  width: 50%; }\n  .listFUTItem .auction .futbin .coins.value .time {\n    display: inline;\n    font-size: 1em; }\n\n@media (max-width: 1130px) {\n  .listFUTItem .auction {\n    width: auto; }\n  html[dir=ltr] .listFUTItem .auction {\n    left: auto; } }\n\n.ut-navigation-container-view.ui-layout-right .listFUTItem .auction {\n  top: 30%; }\n\n.futbinupdate {\n  font-size: 14px;\n  clear: both;\n  display: block; }\n\n.coins.value.futbin {\n  -webkit-filter: hue-rotate(165deg);\n  filter: hue-rotate(165deg); }\n\n.listFUTItem.has-auction-data.futbin-bargain .rowContent {\n  background-color: #32ff54; }\n\n.listFUTItem.has-auction-data.selected.futbin-bargain .rowContent, .listFUTItem.has-auction-data.selected.futbin-bargain .rowContent.active {\n  background-color: #7ffe94;\n  color: #434853; }\n\n.listFUTItem.has-auction-data.futbin-bargain-bid .rowContent {\n  background-color: #674ea7; }\n\n.listFUTItem.has-auction-data.selected.futbin-bargain-bid .rowContent, .listFUTItem.has-auction-data.selected.futbin-bargain-bid .rowContent.active {\n  background-color: #8e7cc3;\n  color: #434853; }\n\n.ut-club-search-results-view .listFUTItem .auction {\n  width: 10%; }\n\n.ut-club-search-results-view .auction-state, .ut-club-search-results-view .auctionValue {\n  display: none; }\n  .ut-club-search-results-view .auction-state.futbin, .ut-club-search-results-view .auctionValue.futbin {\n    display: block; }\n\n.player-picks-modal .time {\n  display: block; }\n\n.ut-squad-slot-pedestal-view.futbin {\n  min-width: 58px;\n  flex: none;\n  width: auto;\n  bottom: -2.6em;\n  white-space: nowrap; }\n  .ut-squad-slot-pedestal-view.futbin .coins.value {\n    text-align: center;\n    margin: 0 8px; }\n\n.ut-squad-overview .ut-squad-summary {\n  width: 70%; }\n\n.refresh-squad-button {\n  margin: 17px 5px;\n  color: #e2dde2; }\n  .refresh-squad-button:before {\n    font-family: UltimateTeam-Icons,sans-serif;\n    content: '\\E051'; }\n", ""]);
 
 // exports
 
