@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        FUT Enhancer
-// @version     4.2.9
+// @version     4.3.0
 // @description Enhances the FIFA Ultimate Team 22 Web app. Includes Futbin integration and other useful tools
 // @license     MIT
 // @author      djizus - Tim Klingeleers
@@ -14054,8 +14054,16 @@ var FutbinPrices = exports.FutbinPrices = function (_BaseScript) {
 					console.log('No data found for this player id : ' + item.playerId);
 					return;
 				  }
-				  //var platform = _fut.utils.getPlatform();
-				  var platform = "pc";				  	  
+				  var platform = _fut.utils.getPlatform();
+				  if (platform === "XBL") {
+					  platform = "xbox";
+				  }
+				  else if (platform === "PSN") {
+					  platform = "ps";
+				  }
+				  else {
+					  platform = "pc";
+				  }				  	  
 				  var res = JSON.parse(res.response);
 				  var futbinData = {};
 				  futbinData[item.playerId] = {};
@@ -14101,8 +14109,16 @@ var FutbinPrices = exports.FutbinPrices = function (_BaseScript) {
 				  FutbinPrices._showFutbinPrice(screen, item, futbinData, showBargains, showBargainsBid, showBargainsPercentage);
 				  futbinlist.push(futbinData[item.playerId]);
 				});
-				//var platform = _fut.utils.getPlatform();
-				var platform = "pc";
+				var platform = _fut.utils.getPlatform();
+				if (platform === "XBL") {
+					platform = "xbox";
+				}
+				else if (platform === "PSN") {
+					platform = "ps";
+				}
+				else {
+					platform = "pc";
+				}
 				if (screen === 'SBCSquadSplitViewController' || screen === 'SquadSplitViewController' || screen === 'UTSquadSplitViewController' || screen === 'UTSBCSquadSplitViewController') {
 					var futbinTotal = futbinlist.reduce(function (sum, item) {
 					return sum + parseInt(item.prices[platform].LCPrice.toString().replace(/[,.]/g, ''), 10) || 0;
@@ -14142,8 +14158,17 @@ var FutbinPrices = exports.FutbinPrices = function (_BaseScript) {
                 return _context.abrupt('return');
 
               case 6:
-                //platform = _fut.utils.getPlatform();
-                platform = "pc";	
+				//t.XBL="XBL",t.PSN="PSN",t.PC="PC",t.STADIA="STADIA",t.SWI="SWI"
+                platform = _fut.utils.getPlatform();
+				if (platform === "XBL") {
+					platform = "xbox";
+				}
+				else if (platform === "PSN") {
+					platform = "ps";
+				}
+				else {
+					platform = "pc";
+				}
                 if (futbinData[playerId]) {
                   _context.next = 9;
                   break;
