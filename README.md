@@ -2,11 +2,11 @@
 
 [![Join the chat at https://gitter.im/futwebapp-tampermonkey/Lobby](https://badges.gitter.im/futwebapp-tampermonkey/Lobby.svg)](https://gitter.im/futwebapp-tampermonkey/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-This is a fork from the original repository here https://github.com/Mardaneus86/futwebapp-tampermonkey and updated for FIFA22.
+This is a fork from the original repository here https://github.com/Mardaneus86/futwebapp-tampermonkey and updated for FIFA23 !
 
-FIFA 22's companion app for FIFA Ultimate Team, the FUT 22 Web App, is a website that let's you trade and manage your team on the go.
+FIFA 23's companion app for FIFA Ultimate Team, the FUT 23 Web App, is a website that let's you trade and manage your team on the go.
 
-This TamperMonkey script is meant to enhance the FUT 22 Web App experience. You can install the script following the instructions below. Afterwards you will get a settings button on the bottom right of the web app, where you can enable every feature by itself. The script provides a certain degree of customization possibilities.
+This TamperMonkey script is meant to enhance the FUT 23 Web App experience. You can install the script following the instructions below. 
 
 :warning: Using this script is at your own risk. EA might (temp-)ban you for altering parts of their Web App.
 
@@ -30,18 +30,21 @@ You can donate to the original creator for his hard work :beers: :+1:
 ## Installation
 Make sure you have user scripts enabled in your browser (these instructions refer to the latest versions of the browser):
 
-* Firefox - install [Tampermonkey](https://tampermonkey.net/?ext=dhdg&browser=firefox). :warning: Has issues loading properly (see issue #115)
+* Firefox - install [Tampermonkey](https://tampermonkey.net/?ext=dhdg&browser=firefox).
 * Chrome - install [Tampermonkey](https://tampermonkey.net/?ext=dhdg&browser=chrome).
 * Opera - install [Tampermonkey](https://tampermonkey.net/?ext=dhdg&browser=opera).
 * Safari - install [Tampermonkey](https://tampermonkey.net/?ext=dhdg&browser=safari).
 * Dolphin - install [Tampermonkey](https://tampermonkey.net/?ext=dhdg&browser=dolphin).
 * UC Browser - install [Tampermonkey](https://tampermonkey.net/?ext=dhdg&browser=ucweb).
 
+Afterwards you will get a settings button on the bottom right of the web app, where you can enable every feature by itself. 
+
+The script provides a certain degree of customization possibilities.
+
 ### Install scripts
 Install the scripts via [OpenUserJS][install-script]. Or find the latest version and release notes at the [releases page](https://github.com/djizus/futwebapp-tampermonkey/releases).
 
 ## Feature requests, Issues and Contribution
-I don't plan to support this script regularly, you can still post in Issues and I may look into it.
+Join the chat room to discuss issues, features and development : [gitter](https://gitter.im/futwebapp-tampermonkey/Lobby)
 
-[issue-list]: https://github.com/djizus/futwebapp-tampermonkey/issues
 [install-script]: https://openuserjs.org/install/djizus/FUT_Enhancer.user.js

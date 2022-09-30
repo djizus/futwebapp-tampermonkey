@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name        FUT Enhancer
-// @version     4.2.6
+// @version     4.2.7
 // @description Enhances the FIFA Ultimate Team 22 Web app. Includes Futbin integration and other useful tools
 // @license     MIT
 // @author      djizus - Tim Klingeleers
-// @icon		https://www.ea.com/fifa/ultimate-team/web-app/images/logo/ea_sports_logo.png
+// @icon        https://www.ea.com/fifa/ultimate-team/web-app/images/logo/ea_sports_logo.png
 // @match       https://www.ea.com/fifa/ultimate-team/web-app/*
 // @match       https://www.easports.com/*/fifa/ultimate-team/web-app/*
 // @match       https://www.ea.com/*/fifa/ultimate-team/web-app/*
@@ -13978,9 +13978,9 @@ var FutbinPrices = exports.FutbinPrices = function (_BaseScript) {
       var listrows = null;
       if (screen === 'SBCSquadSplitViewController' || screen === 'SquadSplitViewController' || screen === 'UTSquadSplitViewController' || screen === 'UTSBCSquadSplitViewController' || screen === 'UTTOTWSquadSplitViewController') {
         listrows = controller._squad._players.slice(0, 11).map(function (p, index) {
-          return {
+		  return {
             data: p._item,
-            target: controller._view._lView._slotViews[index].__root
+            target: controller._view._lView.slotViews[index].__root
           };
         });
       } else if (listController._picks && screen === 'UTPlayerPicksViewController') {
