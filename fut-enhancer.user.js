@@ -4669,12 +4669,18 @@ exports.default = {
     if (services.User.getUser().getSelectedPersona().isPlaystation) {
       return 'ps';
     }
+    // if (services.User.getUser().getSelectedPersona().isG5 && services.User.getUser().getSelectedPersona()._sku === GameSku.PS5) {
+      // return 'ps';
+    // }
     if (services.User.getUser().getSelectedPersona().isPC) {
       return 'pc';
     }
     if (services.User.getUser().getSelectedPersona().isXbox) {
-      return 'xbox';
+      return 'ps';
     }
+    // if (services.User.getUser().getSelectedPersona().isG5 && services.User.getUser().getSelectedPersona()._sku === GameSku.XBX) {
+      // return 'ps';
+    // }
 
     throw new Error('unknown platform');
   }
@@ -13981,7 +13987,6 @@ var FutbinPrices = exports.FutbinPrices = function (_BaseScript) {
 
       var listrows = null;
       if (screen === 'SBCSquadSplitViewController' || screen === 'SquadSplitViewController' || screen === 'UTSquadSplitViewController' || screen === 'UTSBCSquadSplitViewController' || screen === 'UTTOTWSquadSplitViewController') {
-		console.log(controller)
 		listrows = controller._squad._players.slice(0, 11).map(function (p, index) {
 		  return {
             data: p._item,
@@ -14055,15 +14060,6 @@ var FutbinPrices = exports.FutbinPrices = function (_BaseScript) {
 					return;
 				  }
 				  var platform = _fut.utils.getPlatform();
-				  if (platform === "XBL") {
-					  platform = "xbox";
-				  }
-				  else if (platform === "PSN") {
-					  platform = "ps";
-				  }
-				  else {
-					  platform = "pc";
-				  }				  	  
 				  var res = JSON.parse(res.response);
 				  var futbinData = {};
 				  futbinData[item.playerId] = {};
@@ -14110,15 +14106,7 @@ var FutbinPrices = exports.FutbinPrices = function (_BaseScript) {
 				  futbinlist.push(futbinData[item.playerId]);
 				});
 				var platform = _fut.utils.getPlatform();
-				if (platform === "XBL") {
-					platform = "xbox";
-				}
-				else if (platform === "PSN") {
-					platform = "ps";
-				}
-				else {
-					platform = "pc";
-				}
+				console.log(platform);
 				if (screen === 'SBCSquadSplitViewController' || screen === 'SquadSplitViewController' || screen === 'UTSquadSplitViewController' || screen === 'UTSBCSquadSplitViewController') {
 					var futbinTotal = futbinlist.reduce(function (sum, item) {
 					return sum + parseInt(item.prices[platform].LCPrice.toString().replace(/[,.]/g, ''), 10) || 0;
@@ -14158,22 +14146,13 @@ var FutbinPrices = exports.FutbinPrices = function (_BaseScript) {
                 return _context.abrupt('return');
 
               case 6:
-				//t.XBL="XBL",t.PSN="PSN",t.PC="PC",t.STADIA="STADIA",t.SWI="SWI"
                 platform = _fut.utils.getPlatform();
-				if (platform === "XBL") {
-					platform = "xbox";
-				}
-				else if (platform === "PSN") {
-					platform = "ps";
-				}
-				else {
-					platform = "pc";
-				}
-                if (futbinData[playerId]) {
+                
+				if (futbinData[playerId]) {
                   _context.next = 9;
                   break;
                 }
-
+				
                 return _context.abrupt('return');
 
               case 9:
