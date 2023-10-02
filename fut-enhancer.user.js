@@ -4,7 +4,7 @@
 // @description Enhances the EA Sports Ultimate Team 24 Web app. Includes Futbin integration and other useful tools
 // @license     MIT
 // @author      djizus - Tim Klingeleers
-// @icon        https://www.ea.com/fifa/ultimate-team/web-app/images/logo/ea_sports_logo.png
+// @icon        https://www.ea.com/ea-sports-fc/ultimate-team/web-app/images/logo/ea_sports_logo.png
 // @match       https://www.ea.com/ea-sports-fc/ultimate-team/web-app/*
 // @namespace   https://github.com/djizus
 // @supportURL  https://github.com/djizus/futwebapp-tampermonkey/issues
