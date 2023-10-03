@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        FUT Enhancer
-// @version     4.4.1
+// @version     4.4.2
 // @description Enhances the EA Sports Ultimate Team 24 Web app. Includes Futbin integration and other useful tools
 // @license     MIT
 // @author      djizus - Tim Klingeleers
@@ -12603,12 +12603,12 @@ var TransferMarket = exports.TransferMarket = function () {
         // 47 = Champions
         // if it is a Champions card, this is seen as a gold card
         // Can only search for "Gold" in this case
-        searchCriteria.level = enums.SearchLevel.GOLD;
+        searchCriteria.level = SearchLevel.GOLD;
       } else if (item.rareflag >= 3) {
         // 3 = TOTW
         // if the card rare flag is > 3 then it is a special card
         // Can only search for "Specials", not more specific on Rare Type
-        searchCriteria.level = enums.SearchLevel.SPECIAL;
+        searchCriteria.level = SearchLevel.SPECIAL;
       }
 
       searchCriteria.category = SearchCategory.ANY;
@@ -12930,7 +12930,7 @@ var RefreshTransferList = function (_BaseScript) {
           // market search
           setTimeout(function () {
             if ($('.pagingContainer').find('.refresh').length === 0) {
-              $('.pagingContainer').append('<button class="flat pagination refresh" style="float: right;">Refresh list</button>');
+              $('.pagingContainer').prepend('<button class="flat pagination refresh" style="margin: 0 auto;">Refresh list</button>');
               $('.refresh').click(function () {
                 var listController = getAppMain().getRootViewController().getPresentedViewController().getCurrentViewController().getCurrentController()._listController;
                 var currentPage = listController._paginationViewModel.pageIndex;
