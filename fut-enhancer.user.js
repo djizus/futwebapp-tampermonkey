@@ -14398,7 +14398,7 @@ var FutbinPlayerLinks = exports.FutbinPlayerLinks = function (_BaseScript) {
         }
 
         var name = (item._staticData.firstName + ' ' + item._staticData.lastName).replace(' ', '+');
-        var url = 'https://www.futbin.com/search?year=23&term=' + name;
+        var url = 'https://www.futbin.com/search?year=24&term=' + name;
         return GM_xmlhttpRequest({
           method: 'GET',
           url: url,
