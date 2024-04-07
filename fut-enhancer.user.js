@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        FUT Enhancer
-// @version     4.4.3
+// @version     4.4.4
 // @description Enhances the EA Sports Ultimate Team 24 Web app. Includes Futbin integration and other useful tools
 // @license     MIT
 // @author      djizus - Tim Klingeleers
@@ -4828,7 +4828,7 @@ UTGameFlowNavigationController.prototype.didPush = function (t) {
   }
 };
 
-UTViewController.prototype.didPresent = function (t) {
+EAViewController.prototype.didPresent = function (t) {
   if (t) {
     _core.analytics.trackPage(t.className);
     window.onPageNavigation.notify(t.className);
