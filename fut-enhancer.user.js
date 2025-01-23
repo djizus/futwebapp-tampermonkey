@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        FUT Enhancer
 // @version     4.4.5
-// @description Enhances the EA Sports Ultimate Team 24 Web app. Includes Futbin integration and other useful tools
+// @description Enhances the EA Sports Ultimate Team 25 Web app. Includes Futbin integration and other useful tools
 // @license     MIT
 // @author      djizus - Tim Klingeleers
 // @icon        https://www.ea.com/ea-sports-fc/ultimate-team/web-app/images/logo/ea_sports_logo.png
@@ -4837,7 +4837,7 @@ EAViewController.prototype.didPresent = function (t) {
 };
 
 setTimeout(function () {
-  services.Authentication.oAuthentication.observe(undefined, function () {
+  services.Authentication.fcAuthenticationObservable.observe(undefined, function () {
     // reset the logs at startup
     new _fut.Logger().reset();
 
@@ -14042,7 +14042,7 @@ var FutbinPrices = exports.FutbinPrices = function (_BaseScript) {
 			fetchedPlayers += fetchAtOnce;
 			/* eslint-disable no-loop-func */
 			definitionIdMapping.forEach(function (item) {
-			  var futbinUrl = 'https://www.futbin.com/24/playerGraph?type=daily_graph&player=' + item.playerId;
+			  var futbinUrl = 'https://www.futbin.com/25/playerGraph?type=daily_graph&player=' + item.playerId;
 			  GM_xmlhttpRequest({
 				method: 'GET',
 				url: futbinUrl,
@@ -14080,7 +14080,7 @@ var FutbinPrices = exports.FutbinPrices = function (_BaseScript) {
 	  else
 	  {
 		  while (definitionIdMapping.length > 0 && fetchedPlayers < definitionIdMapping.length && _core.Database.get('lastFutbinFetchFail', 0) + 5 * 60000 < Date.now()) {
-			var futbinUrl = 'https://www.futbin.com/24/playerPrices?player=&rids=' + definitionIdMapping.slice(fetchedPlayers, fetchedPlayers + fetchAtOnce).map(function (i) {
+			var futbinUrl = 'https://www.futbin.com/25/playerPrices?player=&rids=' + definitionIdMapping.slice(fetchedPlayers, fetchedPlayers + fetchAtOnce).map(function (i) {
 			  return i.playerId;
 			}).filter(function (current, next) {
 			  return current !== next && current !== 0;
@@ -14393,11 +14393,11 @@ var FutbinPlayerLinks = exports.FutbinPlayerLinks = function (_BaseScript) {
           return i.id === item.definitionId;
         });
         if (futbinPlayer != null) {
-          return resolve('https://www.futbin.com/24/player/' + futbinPlayer.futbinId);
+          return resolve('https://www.futbin.com/25/player/' + futbinPlayer.futbinId);
         }
 
         var name = (item._staticData.firstName + ' ' + item._staticData.lastName).replace(' ', '+');
-        var url = 'https://www.futbin.com/search?year=24&term=' + name;
+        var url = 'https://www.futbin.com/search?year=25&term=' + name;
         return GM_xmlhttpRequest({
           method: 'GET',
           url: url,
@@ -14425,10 +14425,10 @@ var FutbinPlayerLinks = exports.FutbinPlayerLinks = function (_BaseScript) {
                 });
               }
               _core.Database.setJson('futbin-player-ids', futbinPlayerIds);
-              return resolve('https://www.futbin.com/24/player/' + exactPlayers[0].id);
+              return resolve('https://www.futbin.com/25/player/' + exactPlayers[0].id);
             } else if (exactPlayers.length > 1) {
               // Take first one, several players are returned more than once
-              return resolve('https://www.futbin.com/24/player/' + exactPlayers[0].id);
+              return resolve('https://www.futbin.com/25/player/' + exactPlayers[0].id);
             }
 
             return resolve(null); // TODO: what should we do if we find more than one?

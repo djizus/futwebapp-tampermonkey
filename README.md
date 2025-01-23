@@ -2,11 +2,11 @@
 
 [![Join the chat at https://gitter.im/futwebapp-tampermonkey/Lobby](https://badges.gitter.im/futwebapp-tampermonkey/Lobby.svg)](https://gitter.im/futwebapp-tampermonkey/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-This is a fork from the original repository here https://github.com/Mardaneus86/futwebapp-tampermonkey and updated for EA Sports FC 24 !
+This is a fork from the original repository here https://github.com/Mardaneus86/futwebapp-tampermonkey and updated for EA Sports FC 25 !
 
-The EA Sports FC 24 Web App is a website that let's you trade and manage your team on the go.
+The EA Sports FC 25 Web App is a website that let's you trade and manage your team on the go.
 
-This TamperMonkey script is meant to enhance the EA Sports FC 24 Web App experience. You can install the script following the instructions below. 
+This TamperMonkey script is meant to enhance the EA Sports FC 25 Web App experience. You can install the script following the instructions below. 
 
 :warning: Using this script is at your own risk. EA might (temp-)ban you for altering parts of their Web App.
 
